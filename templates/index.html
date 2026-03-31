@@ -2,7 +2,7 @@
 <html lang="el">
 <head>
     <meta charset="UTF-8">
-    <title>AI Shift Scheduler</title>
+    <title>VardionAI</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         body { font-family: Arial, sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; }
@@ -30,7 +30,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>🗓️ AI Πρόγραμμα Βαρδιών</h1>
+        <h1>AI Πρόγραμμα Βαρδιών</h1>
         <p>Περιγράψτε το πρόβλημα βαρδιών σας με φυσική γλώσσα:</p>
         
         <form method="POST">
@@ -40,20 +40,20 @@
 
         {% if error_message %}
             <div class="result" style="color: red;">
-                <h3>⚠️ Σφάλμα:</h3>
+                <h3>Σφάλμα:</h3>
                 <p>{{ error_message }}</p>
             </div>
         {% endif %}
 
         {% if table_html %}
-            <button class="btn-pdf" onclick="generatePDF()">📄 Εξαγωγή σε PDF</button>
+            <button class="btn-pdf" onclick="generatePDF()">Εξαγωγή σε PDF</button>
             
             <div id="schedule-content" class="result">
-                <h3>✅ Το Πρόγραμμά σας</h3>
+                <h3>Το Πρόγραμμά σας</h3>
                 {{ table_html | safe }}
 
                 {% if stats_html %}
-                    <h3 style="margin-top: 40px;">📊 Στατιστικά Δικαιοσύνης</h3>
+                    <h3 style="margin-top: 40px;">Στατιστικά Δικαιοσύνης</h3>
                     {{ stats_html | safe }}
                 {% endif %}
             </div>
