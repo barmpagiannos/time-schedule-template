@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Shift Scheduler</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1 { color: #333; }
+        textarea { width: 100%; height: 150px; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; margin-bottom: 20px; box-sizing: border-box; }
+        button { background-color: #28a745; color: white; border: none; padding: 10px 20px; font-size: 16px; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #218838; }
+        
+        /* Κουμπί PDF */
+        .btn-pdf { background-color: #dc3545; margin-top: 15px; margin-bottom: 15px;}
+        .btn-pdf:hover { background-color: #c82333; }
+        
+        .result { margin-top: 30px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; margin-bottom: 30px; }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+        
+        /* Διαφορετικά χρώματα για τους δύο πίνακες */
+        table.main-table th { background-color: #007bff; color: white; }
+        table.stats-table th { background-color: #6c757d; color: white; }
+        
+        /* Highlight για το σύνολο βαρδιών στα στατιστικά */
+        table.stats-table td:nth-child(2) { font-weight: bold; background-color: #f8f9fa; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🗓️ AI Πρόγραμμα Βαρδιών</h1>
+        <p>Περιγράψτε το πρόβλημα βαρδιών σας με φυσική γλώσσα:</p>
+        
+        <form method="POST">
+            <textarea name="user_input" placeholder="π.χ. Έχω 10 υπαλλήλους, 3 βάρδιες, ο Γιώργος έχει ρεπό Τετάρτη..."></textarea>
+            <button type="submit">Δημιουργία Προγράμματος</button>
+        </form>
+
+        {% if error_message %}
+            <div class="result" style="color: red;">
+                <h3>⚠️ Σφάλμα:</h3>
+                <p>{{ error_message }}</p>
+            </div>
+        {% endif %}
+
+        {% if table_html %}
+            <button class="btn-pdf" onclick="generatePDF()">📄 Εξαγωγή σε PDF</button>
+            
+            <div id="schedule-content" class="result">
+                <h3>✅ Το Πρόγραμμά σας</h3>
+                {{ table_html | safe }}
+
+                {% if stats_html %}
+                    <h3 style="margin-top: 40px;">📊 Στατιστικά Δικαιοσύνης</h3>
+                    {{ stats_html | safe }}
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+        function generatePDF() {
+            const element = document.getElementById('schedule-content');
+            
+            const opt = {
+                margin:       10,
+                filename:     'AI_Programma_Vardiwn.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2 },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' }
+            };
+
+            html2pdf().set(opt).from(element).save();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+{
+    "metadata": {
+        "num_days": 7,
+        "num_shifts": 3,
+        "nurses_per_shift": 2
+    },
+    "employees": [
+        {
+            "id": 0,
+            "name": "Γιώργος"
+        },
+        {
+            "id": 1,
+            "name": "Μαρία"
+        },
+        {
+            "id": 2,
+            "name": "Κώστας"
+        },
+        {
+            "id": 3,
+            "name": "Άννα"
+        },
+        {
+            "id": 4,
+            "name": "Νίκος"
+        },
+        {
+            "id": 5,
+            "name": "Ελένη"
+        },
+        {
+            "id": 6,
+            "name": "Πέτρος"
+        },
+        {
+            "id": 7,
+            "name": "Σοφία"
+        },
+        {
+            "id": 8,
+            "name": "Παύλος"
+        },
+        {
+            "id": 9,
+            "name": "Ιωάννα"
+        }
+    ],
+    "hard_constraints": {
+        "max_shifts_per_day": 1,
+        "max_shifts_per_week": 5,
+        "individual_constraints": [
+            {
+                "employee_id": 0,
+                "forbidden_days": [
+                    2,
+                    3
+                ]
+            },
+            {
+                "employee_id": 1,
+                "forbidden_days": [
+                    5,
+                    6
+                ]
+            },
+            {
+                "employee_id": 2,
+                "max_weekly_shifts": 3
+            },
+            {
+                "employee_id": 3,
+                "forbidden_days": [
+                    4
+                ]
+            }
+        ]
+    }
+}
